@@ -5,6 +5,7 @@ html {
 header {
   text-align: center;
   font-size: 50px;
+  color: whitesmoke;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
   background-image: url(images/chalk.jpg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 .buttons {
