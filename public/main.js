@@ -1,50 +1,218 @@
-// Tic Tac Toe
+let clickCount = 0
+let gameBoard
+let playerClickCount = 0
+const playerOne = 'x'
+const playerTwo = 'o'
+const winCombos = [
+  ['one', 'two', 'three'],
+  ['four', 'five', 'six'],
+  ['seven', 'eight', 'nine'],
+  ['one', 'four', 'seven'],
+  ['two', 'five', 'eight'],
+  ['three', 'six', 'nine'],
+  ['one', 'five', 'nine'],
+  ['three', 'five', 'seven']
+]
 
-// -Create board, made up of a 3 x 3 grid of equally sized squares (three rows of three squares)
-// -Classify each square 1 through 9 from top left to bottom right
-// -Create player 1
-// 	-assign player one to ‘X’
-// 	-player one goes first
-// -Create player 2
-// 	-assign player 2 to ‘O’
-// 	-player 2 goes second
-// -Player 1 takes a turn and selects one of the empty squares 1-9
-//         - if the square the user chose already has an X or an O, reject the choice
-// 	-screen displays ‘X’ in selected square
-// 	-remember which square has been selected
-// -Player 2 takes a turn and selects one of any other open squares
-// 	-screen displays ‘O’ in selected square
-// 	-remember which square has been selected
-// -the players alternate turns until a player has 3 squares selected in a row -
-// -If Player 1 has three in a row selected…
-//         -square 1 and the square 2 and the square 3 are all X, Display Player 1 Wins!
-//         - square 4 and the square 5 and the square 6 are all X, Display Player 1 Wins!
-// 	- square 7 and the square 8 and the square 9 are all X, Display Player 1 Wins!
+const playerOneWinCondition = () => {
+  if (
+    gameBoard.one === 'x' &&
+    gameBoard.two === 'x' &&
+    gameBoard.three === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-// 	-square 1 and the square 4 and the square 7 are all X, Display Player 1 Wins!
-//         - square 2 and the square 5 and the square 8 are all X, Display Player 1 Wins!
-// 	- square 3 and the square 6 and the square 9 are all X, Display Player 1 Wins!
+  if (
+    gameBoard.four === 'x' &&
+    gameBoard.five === 'x' &&
+    gameBoard.six === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-//         - square 1 and the square 5 and the square 9 are all X, Display Player 1 Wins!
-// 	- square 3 and the square 5 and the square 7 are all X, Display Player 1 Wins!
+  if (
+    gameBoard.seven === 'x' &&
+    gameBoard.eight === 'x' &&
+    gameBoard.nine === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-// -If Player 2 has three in a row selected…
-// 	- square 1 and the square 2 and the square 3 are all O, Display Player 2 Wins!
-//         - square 4 and the square 5 and the square 6 are all O, Display Player 2 Wins!
-// 	- square 7 and the square 8 and the square 9 are all O, Display Player 2 Wins!
+  if (
+    gameBoard.one === 'x' &&
+    gameBoard.four === 'x' &&
+    gameBoard.seven === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-// 	-square 1 and the square 4 and the square 7 are all O, Display Player 2 Wins!
-//         - square 2 and the square 5 and the square 8 are all O, Display Player 2 Wins!
-// 	- square 3 and the square 6 and the square 9 are all O, Display Player 2 Wins!
+  if (
+    gameBoard.two === 'x' &&
+    gameBoard.five === 'x' &&
+    gameBoard.eight === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-//         - square 1 and the square 5 and the square 9 are all O, Display Player 2 Wins!
-// 	- square 3 and the square 5 and the square 7 are all O, Display Player 2 Wins!
+  if (
+    gameBoard.three === 'x' &&
+    gameBoard.six === 'x' &&
+    gameBoard.nine === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
 
-// -If every square has been selected and no player has 3 in a row, then display its a tie!
-// - Restart Game button at the bottom
+  if (
+    gameBoard.one === 'x' &&
+    gameBoard.five === 'x' &&
+    gameBoard.nine === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
+
+  if (
+    gameBoard.three === 'x' &&
+    gameBoard.five === 'x' &&
+    gameBoard.seven === 'x'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player One Wins!'
+  }
+}
+
+const playerTwoWinCondition = () => {
+  if (
+    gameBoard.one === 'o' &&
+    gameBoard.two === 'o' &&
+    gameBoard.three === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.four === 'o' &&
+    gameBoard.five === 'o' &&
+    gameBoard.six === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.seven === 'o' &&
+    gameBoard.eight === 'o' &&
+    gameBoard.nine === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.one === 'o' &&
+    gameBoard.four === 'o' &&
+    gameBoard.seven === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.two === 'o' &&
+    gameBoard.five === 'o' &&
+    gameBoard.eight === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.three === 'o' &&
+    gameBoard.six === 'o' &&
+    gameBoard.nine === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.one === 'o' &&
+    gameBoard.five === 'o' &&
+    gameBoard.nine === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+
+  if (
+    gameBoard.three === 'o' &&
+    gameBoard.five === 'o' &&
+    gameBoard.seven === 'o'
+  ) {
+    document.querySelector('.game-decision').textContent = 'Player Two Wins!'
+  }
+}
+
+let determineTie = () => {
+  if (
+    gameBoard.one &&
+    gameBoard.two &&
+    gameBoard.three &&
+    gameBoard.four &&
+    gameBoard.five &&
+    gameBoard.six &&
+    gameBoard.seven &&
+    gameBoard.eight &&
+    gameBoard.nine !== ''
+  ) {
+    document.querySelector('.game-decision').textContent = "It's a tie!"
+  }
+}
+
+// const determineWinner = () => {
+//   if (playerOneWinCondition) {
+//     playerOneWinCondition()
+//   } else if (playerTwoWinCondition) {
+//     playerTwoWinCondition()
+//   } else {
+//     determineTie()
+//   }
+// }
+const determineWinner = () => {
+  playerOneWinCondition()
+  playerTwoWinCondition()
+  determineTie()
+}
+
+let box = document.querySelectorAll('.box')
+
+let newGame = () => {
+  gameBoard = Array.from(Array(9).keys())
+  for (let i = 0; i < box.length; i++) {
+    box[i].addEventListener('click', playerClick)
+  }
+}
+
+const playerClick = square => {
+  if (playerClickCount === 0) {
+    turn(square.target.id, playerOne)
+    playerClickCount = 1
+  } else {
+    turn(square.target.id, playerTwo)
+    playerClickCount = 0
+  }
+}
+
+const turn = (squareID, player) => {
+  gameBoard[squareID] = player
+  document.getElementById(squareID).textContent = player
+  document.getElementById(squareID).removeEventListener('click', playerClick)
+  determineWinner()
+}
 
 const main = () => {
-  //document.querySelector('h1').textContent += '?'
+  document.querySelector('.board').addEventListener('click', () => {
+    clickCount++
+  })
+
+  document.querySelector('.replay-button').addEventListener('click', () => {
+    document.location = '/'
+  })
+
+  newGame()
 }
 
 document.addEventListener('DOMContentLoaded', main)

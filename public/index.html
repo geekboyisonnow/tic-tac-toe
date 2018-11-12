@@ -7,15 +7,31 @@
     <link rel="stylesheet" href="/screen.css" />
   </head>
 
-  <header>Tic-Tac-Toe</header>
   <body>
-    <div class="buttons">
-      <button class="1">X</button> <button class="2"></button>
-      <button class="3">O</button> <button class="4"></button>
-      <button class="5"></button> <button class="6"></button>
-      <button class="7"></button> <button class="8"></button>
-      <button class="9"></button>
-    </div>
+    <h1>Tic-Tac-Toe</h1>
+
+    <h2 class="game-decision">Let's Play!</h2>
+
+    <table class="board">
+      <tr>
+        <td class="box" id="one"></td>
+        <td class="box" id="two"></td>
+        <td class="box" id="three"></td>
+      </tr>
+      <tr>
+        <td class="box" id="four"></td>
+        <td class="box" id="five"></td>
+        <td class="box" id="six"></td>
+      </tr>
+      <tr>
+        <td class="box" id="seven"></td>
+        <td class="box" id="eight"></td>
+        <td class="box" id="nine"></td>
+      </tr>
+    </table>
+
+    <button title="Play Again!" class="replay-button">Play Again</button>
+
     <script src="/main.js" charset="utf-8"></script>
   </body>
 </html>
